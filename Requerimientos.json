@@ -1,0 +1,13 @@
+[{
+        "iIdRequerimiento": "1",
+        "cNombreRequerimiento": "Consultar Roles",
+        "iTotalLinea": "23",
+        "iLineasCodificadas": "50"
+    },
+    {
+        "iIdRequerimiento": "2",
+        "cNombreRequerimiento": "Consultar usuarios asignados a un rol",
+        "iTotalLinea": "21",
+        "iLineasCodificadas": "40"
+    }
+]
