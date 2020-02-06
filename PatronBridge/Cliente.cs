@@ -1,7 +1,7 @@
 ﻿using PatronBridge.Empresa;
-using PatronBridge.Transporte;
+using PatronBridge.Factory;
+using PatronBridge.Transporte.Interfaces;
 using System;
-using System.Collections.Generic;
 
 namespace PatronBridge
 {
@@ -9,28 +9,24 @@ namespace PatronBridge
     {
         public void Main()
         {
-            List<Empresas> lstempresas = new List<Empresas>() {
-            new DHL(new Barco(),"Tenis"),
-            new DHL(new Avion(),"Corbata"),
-            new Fedex(new Tren(),"Reloj"),
-            new Fedex(new Avion(),"Computadora"),
-            new Estafeta(new Tren(),"Playera"),
-            new Estafeta(new Avion(),"Cables"),
-            new Estafeta(new Barco(),"Celular"),
-            };
+            ITransporteFactory transporte = new TransporteFactory();
+            IEmpresaFactory empresaFactory = new EmpresaFactory();
 
-            foreach (var empresas in lstempresas)
+            do
             {
-                Console.ForegroundColor = ConsoleColor.White;
-                Console.WriteLine($"El paquete se ha enviado mediante {empresas.GetType().Name} empresa de mensajería.\n");
-                IniciarMensajeria(empresas);
-            }
+                ITipoEnvio tipoEnvio = transporte.CrearInstancia(ObtenerTransporte());
+                int iEmpresa = ObtenerEmpresa();
+                string cProducto = ObtenerProducto();
+                Empresas empresa = empresaFactory.CrearInstancia(iEmpresa, tipoEnvio, cProducto);
 
+                IniciarMensajeria(empresa);
+
+            } while (true);
         }
 
         public void IniciarMensajeria(Empresas empresas)
         {
-            
+
             empresas.recogerPaquete();
 
             empresas.enviarPaquete();
@@ -39,6 +35,33 @@ namespace PatronBridge
 
             Console.WriteLine("\n");
             Console.ReadKey();
+        }
+
+        public string ObtenerProducto()
+        {
+            Console.WriteLine("\nEscribe el nombre del producto:");
+            return Console.ReadLine();
+        }
+
+        public int ObtenerEmpresa()
+        {
+            Console.WriteLine("\nEliga el número que corresponda a la empresa:" +
+               "\n1. DHL" +
+               "\n2. Fedex" +
+               "\n3. Estafeta");
+
+            return Convert.ToInt32(Console.ReadLine());
+
+        }
+
+        public int ObtenerTransporte()
+        {
+            Console.WriteLine("\nEliga el número que corresponda al tipo de transporte:" +
+              "\n1. Barco" +
+              "\n2. Tren" +
+              "\n3. Avion");
+
+            return Convert.ToInt32(Console.ReadLine());
         }
     }
 }

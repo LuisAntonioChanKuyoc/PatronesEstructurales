@@ -48,6 +48,10 @@
     <Compile Include="Empresa\Empresas.cs" />
     <Compile Include="Empresa\Estafeta.cs" />
     <Compile Include="Empresa\Fedex.cs" />
+    <Compile Include="Factory\EmpresaFactory.cs" />
+    <Compile Include="Factory\IEmpresaFactory.cs" />
+    <Compile Include="Factory\ITransporteFactory.cs" />
+    <Compile Include="Factory\TransporteFactory.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Transporte\Avion.cs" />
